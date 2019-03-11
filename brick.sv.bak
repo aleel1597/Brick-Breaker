@@ -1,0 +1,71 @@
+
+module  brick (input         Reset, 
+                             frame_clk,          // The clock indicating a new frame (~60Hz)
+					output int bricks[640][480],
+               output [9:0]  brickX, brickY, brickW, brickH // brick coordinates of top left corner and size of individual brick
+              );
+    
+    logic [9:0] brick_X_Pos, brick_Y_Pos;
+    logic [9:0] brick_X_Pos_in, brick_Y_Pos_in;
+     
+    parameter [9:0] brick_X_Center=300;  // Center position on the X axis
+    parameter [9:0] brick_Y_Center=100;  // Center position on the Y axis
+	 
+	 /*
+    parameter [9:0] brick_X_Min=0;       // Leftmost point on the X axis
+    parameter [9:0] brick_X_Max=639;     // Rightmost point on the X axis
+    parameter [9:0] brick_Y_Min=0;       // Topmost point on the Y axis
+    parameter [9:0] brick_Y_Max=479;     // Bottommost point on the Y axis
+    parameter [9:0] brick_X_Step=3;      // Step size on the X axis
+    parameter [9:0] brick_Y_Step=3;      // Step size on the Y axis
+	 */
+	 
+    parameter [9:0] brick_Width=8;        // brick size
+    parameter [9:0] brick_Height=5;        // brick size
+    
+	 
+    assign brickX = brick_X_Pos;
+    assign brickY = brick_Y_Pos;
+    assign brickW = brick_Width;
+    assign brickH = brick_Height;
+    
+	 assign bricks[]
+	 
+    always_ff @ (posedge frame_clk or posedge Reset)
+    begin
+        
+            brick_X_Pos <= brick_X_Center;
+            brick_Y_Pos <= brick_Y_Center;
+        
+    end
+    
+    always_comb
+    begin
+       /* // By default, keep motion unchanged
+        brick_X_Motion_in = brick_X_Motion;
+        brick_Y_Motion_in = brick_Y_Motion;
+        
+        // Be careful when using comparators with "logic" datatype becuase compiler treats 
+        //   both sides of the operator UNSIGNED numbers. (unless with further type casting)
+        // e.g. brick_Y_Pos - brick_Size <= brick_Y_Min 
+        // If brick_Y_Pos is 0, then brick_Y_Pos - brick_Size will not be -4, but rather a large positive number.
+		  left = 1'b1;
+		  right = 1'b1;
+		  	
+		  
+		  if ( brick_X_Pos + brick_Width >= brick_X_Max )  // brick is at the right edge, BOUNCE!
+			begin
+            brick_X_Motion_in = 10'd0;		
+				right = 1'b0;
+			end
+		  else if (brick_X_Pos <= brick_X_Min + brick_Width )  // brick is at the left edge, BOUNCE!
+			begin
+            brick_X_Motion_in = 10'd0;
+				left = 1'b0;
+			end
+			
+			*/
+
+    end
+    
+endmodule
